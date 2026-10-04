@@ -1,0 +1,19 @@
+1. "I've been trying to update my billing information for the last 3 days and every time I hit save, the page crashes. I'm furious because my subscription is about to expire. Fix this right now or I'm canceling my account and demanding a refund!"
+
+2. "Absolutely loving the new dashboard update! The dark mode is super sleek and it loads way faster than before. Great job to the design team!"
+
+3. "The platform is generally good, but the pricing is getting a bit too steep for my small team. Also, I couldn't figure out how to export my reports to PDF. Might have to look for cheaper alternatives if prices go up again."
+
+4. "Your sales rep John was incredibly helpful during my onboarding yesterday. However, the documentation for the API integration is completely outdated and took my engineers 4 hours to figure out. Please update your docs."
+
+5. "I want a refund immediately! The app charged my card twice this month and nobody from support has answered my tickets. This is unacceptable and feels like a scam."
+
+6. "Hey guys, quick feature request. It would be amazing if you could add a drag-and-drop feature for uploading images. Currently clicking through three menus is really tedious for my daily workflow."
+
+7. "Is the server down? I'm getting a 502 Bad Gateway error every time I try to log in. I need to access my files for a presentation in 20 minutes! Please help!"
+
+8. "I just switched from your biggest competitor and I'm blown away by how intuitive your UI is. I haven't had to read a single tutorial to get started. Worth every penny."
+
+9. "The mobile app keeps logging me out every time I close it on my iPhone 15. It's really frustrating having to type my password 10 times a day. Please fix this bug."
+
+10. "The core product works well enough, but I really wish there was a way to customize the automated email templates. Right now they look a bit unprofessional when sent to my clients."
