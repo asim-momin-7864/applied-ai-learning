@@ -26,6 +26,8 @@ export async function POST(req: Request) {
   // Without this conversion, streamText throws a Zod validation error on `content`
   const result = streamText({
     model,
+    system:
+      "If user dont provide prompt, Give 5 lines description of uploaded image",
     messages: await convertToModelMessages(messages),
   });
 
