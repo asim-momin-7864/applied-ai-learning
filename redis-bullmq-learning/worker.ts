@@ -4,7 +4,7 @@ import Redis from "ioredis";
 // ============================================================================
 // THE STANDALONE WORKER PROCESS
 // ============================================================================
-// This is a completely separate process from Next.js. 
+// This is a completely separate process from Next.js.
 // It does NOT run inside the Next.js request lifecycle.
 // It connects directly to Redis, listens to the "heavy-jobs" queue,
 // and processes tasks one by one.
@@ -29,7 +29,7 @@ const worker = new Worker(
     // ========================================================================
     // This is where your heavy, multi-minute AI workflow goes.
     // Since this is a background worker, it won't time out Vercel's 10s-60s limit!
-    // 
+    //
     // Example:
     // const stream = await generateText({ ... });
     // const agentResponse = await langgraph.invoke({ ... });
@@ -37,19 +37,19 @@ const worker = new Worker(
 
     // Mocking a heavy task (e.g., 5 seconds of work)
     console.log(`⏳ Processing job ${job.id}... (Simulating 5s delay)`);
-    await new Promise((resolve) => setTimeout(resolve, 5000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+
     console.log(`✅ Completed job ${job.id}`);
 
     // Whatever you return here gets stored in Redis as `job.returnvalue`.
     // The Next.js API will poll for this exact result.
     return {
       status: "success",
-      ai_response: `Here is your generated report for: "${job.data.prompt || 'Unknown'}"!`,
-      timestamp: new Date().toISOString()
+      ai_response: `Here is your generated report for: "${job.data.prompt || "Unknown"}"!`,
+      timestamp: new Date().toISOString(),
     };
   },
-  { connection }
+  { connection },
 );
 
 // Graceful shutdown handling
