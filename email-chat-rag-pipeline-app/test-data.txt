@@ -1,0 +1,81 @@
+=========================================
+EMAIL TEST DATA FOR RAG PIPELINE
+=========================================
+Use these emails to manually populate your database via the /ingest page.
+
+--- EMAIL 1 ---
+SUBJECT: Q3 Roadmap Planning
+BODY:
+Hi team, we'll be finalizing the Q3 roadmap next Tuesday. Please make sure all proposed epics are added to Jira. We need to focus heavily on the new AI chat features and performance optimizations.
+
+--- EMAIL 2 ---
+SUBJECT: Weekly Sync Notes
+BODY:
+Here are the notes from our weekly sync. Marketing will launch the new campaign on the 15th. Engineering is on track with the v2.0 release. Let me know if I missed anything.
+
+--- EMAIL 3 ---
+SUBJECT: Your upcoming flight to Seattle
+BODY:
+Flight details for your trip to Seattle. Departure: Monday 8:00 AM from SFO. Arrival: 10:15 AM at SEA. Reservation code is XY982L. Have a great trip!
+
+--- EMAIL 4 ---
+SUBJECT: Action Required: Security Policy Update
+BODY:
+All employees must complete the mandatory security training by the end of the month. Failure to comply will result in account suspension. Link to training is on the intranet portal.
+
+--- EMAIL 5 ---
+SUBJECT: Re: Project Phoenix Status
+BODY:
+I reviewed the latest designs for Project Phoenix. The new dashboard looks great, but we need to rethink the mobile navigation. Let's schedule a call tomorrow at 2 PM to discuss.
+
+--- EMAIL 6 ---
+SUBJECT: Welcome to the team, Sarah!
+BODY:
+Please join me in welcoming Sarah to the engineering team. She'll be working as a Frontend Developer starting today. Say hi when you see her on Slack!
+
+--- EMAIL 7 ---
+SUBJECT: Invoice INV-2023-089 for Server Costs
+BODY:
+Please find attached the invoice for AWS server costs for the month of October. Total amount is $1,245.50. Please process payment within 15 days.
+
+--- EMAIL 8 ---
+SUBJECT: Lunch order for Friday
+BODY:
+We are ordering from the new Italian place for Friday's team lunch. Please add your order to the shared spreadsheet by Thursday 5 PM.
+
+--- EMAIL 9 ---
+SUBJECT: Client Feedback on Alpha Release
+BODY:
+The client tested the Alpha release and had mostly positive feedback. They did mention the load time on the reporting page is too slow. Can we get someone to look into optimizing the SQL queries?
+
+--- EMAIL 10 ---
+SUBJECT: Out of Office: Vacations
+BODY:
+I will be out of the office on vacation from Nov 1st to Nov 15th with limited access to email. If it's urgent, please contact my manager, Dave.
+
+
+=========================================
+TEST QUESTIONS FOR THE CHATBOT
+=========================================
+Once the emails above are ingested, try asking these questions to test the RAG logic.
+
+1. What are we focusing on for the Q3 roadmap?
+2. Did marketing mention when they are launching the new campaign?
+3. When does my flight to Seattle depart?
+4. What is my flight reservation code?
+5. What happens if I don't complete the security training?
+6. Is there any feedback on the Project Phoenix designs?
+7. What time is the meeting to discuss Project Phoenix?
+8. Who is the new person joining the engineering team?
+9. What role is Sarah taking on?
+10. How much is the AWS invoice for October?
+11. What is the invoice number for the server costs?
+12. When is the payment for the AWS invoice due?
+13. Where are we getting lunch from on Friday?
+14. When is the deadline to submit the lunch order?
+15. What was the client's feedback on the Alpha release?
+16. Did the client report any issues with the Alpha release?
+17. How long will you be out of the office on vacation?
+18. Who should I contact in case of an emergency while you are on vacation?
+19. Is engineering on track for the v2.0 release?
+20. Do we have any action items regarding SQL queries?
