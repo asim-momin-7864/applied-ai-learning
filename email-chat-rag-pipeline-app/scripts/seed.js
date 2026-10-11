@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 async function seed() {
   const filePath = path.join(__dirname, "..", "test-data.txt");
@@ -11,7 +11,9 @@ async function seed() {
   const rawText = fs.readFileSync(filePath, "utf-8");
   const emailBlocks = rawText.split("--- EMAIL ").slice(1);
 
-  console.log(`🚀 Found ${emailBlocks.length} emails in test-data.txt. Starting ingestion into http://localhost:3000/api/ingest...\n`);
+  console.log(
+    `🚀 Found ${emailBlocks.length} emails in test-data.txt. Starting ingestion into http://localhost:3000/api/ingest...\n`,
+  );
 
   let successCount = 0;
 
@@ -34,13 +36,17 @@ async function seed() {
       const json = await res.json();
       if (res.ok) {
         successCount++;
-        console.log(`✅ [${successCount}/${emailBlocks.length}] Ingested: "${subject}" (${json.chunksInserted} chunks)`);
+        console.log(
+          `✅ [${successCount}/${emailBlocks.length}] Ingested: "${subject}" (${json.chunksInserted} chunks)`,
+        );
       } else {
         console.error(`❌ Failed: "${subject}" - ${json.error}`);
       }
     } catch (err) {
       console.error(`❌ Network error for "${subject}":`, err.message);
-      console.error("   Make sure Next.js dev server is running on http://localhost:3000 (npm run dev)");
+      console.error(
+        "   Make sure Next.js dev server is running on http://localhost:3000 (npm run dev)",
+      );
       process.exit(1);
     }
 
@@ -48,7 +54,9 @@ async function seed() {
     await new Promise((resolve) => setTimeout(resolve, 800));
   }
 
-  console.log(`\n🎉 Seeding complete! Successfully ingested ${successCount} emails.`);
+  console.log(
+    `\n🎉 Seeding complete! Successfully ingested ${successCount} emails.`,
+  );
 }
 
 seed();
