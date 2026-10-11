@@ -5,20 +5,19 @@ import { DefaultChatTransport } from "ai";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SendIcon, Bot, User } from "lucide-react";
-
-const NO_MATCH_MSG =
-  "I couldn't find any relevant emails for your question. Try rephrasing or ingest more emails.";
 
 export default function ChatUI() {
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({ api: "/api/chat" }),
-    // When the route returns a 404 (no emails found), show a friendly fallback
-    onError: () => {
-      sendMessage({ text: NO_MATCH_MSG });
-    },
   });
 
   const [input, setInput] = useState("");
@@ -41,7 +40,6 @@ export default function ChatUI() {
   return (
     <div className="container mx-auto max-w-3xl p-4 sm:p-8 flex-1 flex flex-col h-[calc(100vh-3.5rem)]">
       <Card className="flex-1 flex flex-col shadow-lg border-muted/50 overflow-hidden">
-
         {/* Header */}
         <CardHeader className="bg-muted/30 border-b pb-4">
           <CardTitle className="text-xl font-semibold flex items-center gap-2">
@@ -54,7 +52,6 @@ export default function ChatUI() {
         <CardContent className="flex-1 p-0 overflow-hidden">
           <ScrollArea className="h-full p-4" ref={scrollRef}>
             <div className="flex flex-col gap-4 pb-4">
-
               {/* Empty state */}
               {messages.length === 0 && (
                 <div className="text-center text-muted-foreground mt-8 text-sm">
@@ -71,23 +68,36 @@ export default function ChatUI() {
                     className={`flex items-start gap-3 max-w-[85%] ${isUser ? "ml-auto flex-row-reverse" : "mr-auto"}`}
                   >
                     {/* Avatar */}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                      isUser ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-                    }`}>
-                      {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        isUser
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      {isUser ? (
+                        <User className="w-4 h-4" />
+                      ) : (
+                        <Bot className="w-4 h-4" />
+                      )}
                     </div>
 
                     {/* Bubble */}
-                    <div className={`p-3 rounded-xl text-sm ${
-                      isUser
-                        ? "bg-primary text-primary-foreground rounded-tr-sm"
-                        : "bg-muted rounded-tl-sm border"
-                    }`}>
+                    <div
+                      className={`p-3 rounded-xl text-sm ${
+                        isUser
+                          ? "bg-primary text-primary-foreground rounded-tr-sm"
+                          : "bg-muted rounded-tl-sm border"
+                      }`}
+                    >
                       {/* Render only text parts */}
                       {message.parts
                         .filter((part) => part.type === "text")
                         .map((part, i) => (
-                          <span key={i} className="whitespace-pre-wrap leading-relaxed">
+                          <span
+                            key={i}
+                            className="whitespace-pre-wrap leading-relaxed"
+                          >
                             {(part as { type: "text"; text: string }).text}
                           </span>
                         ))}
@@ -107,14 +117,16 @@ export default function ChatUI() {
                   </div>
                 </div>
               )}
-
             </div>
           </ScrollArea>
         </CardContent>
 
         {/* Input form */}
         <CardFooter className="p-4 border-t bg-background mt-auto">
-          <form className="flex w-full gap-2 items-center" onSubmit={handleSubmit}>
+          <form
+            className="flex w-full gap-2 items-center"
+            onSubmit={handleSubmit}
+          >
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -134,7 +146,6 @@ export default function ChatUI() {
             </Button>
           </form>
         </CardFooter>
-
       </Card>
     </div>
   );

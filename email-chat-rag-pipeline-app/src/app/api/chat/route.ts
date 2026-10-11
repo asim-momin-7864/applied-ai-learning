@@ -9,7 +9,7 @@ import {
   type UIMessage,
 } from "ai";
 import { ollama, supabase } from "@/lib/config";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { messages }: { messages: UIMessage[] } = await req.json();
@@ -37,18 +37,24 @@ export async function POST(req: NextRequest) {
 
   if (error) throw new Error(error.message);
 
-  // Step 4: If no emails found, return early without calling the LLM
+  // Step 4: If no emails found, skip the LLM and return a fallback message directly
   if (!matchedEmails || matchedEmails.length === 0) {
-    return NextResponse.json(
-      { error: "NO_MATCH", message: "I couldn't find any relevant emails for your question." },
-      { status: 404 }
-    );
+    const fallbackText =
+      "I couldn't find any relevant emails for your question. Try rephrasing or ingest more emails.";
+    const fallbackResult = streamText({
+      model: ollama("llama3.2:1b"),
+      prompt: `Say this sentence word for word, nothing else: "${fallbackText}"`,
+    });
+    return createUIMessageStreamResponse({
+      stream: toUIMessageStream({ stream: fallbackResult.stream }),
+    });
   }
 
   // Step 5: Format the matched emails into a readable context string
   const context = matchedEmails
-    .map((email: { subject: string; content: string }) =>
-      `Subject: ${email.subject}\nBody: ${email.content}`
+    .map(
+      (email: { subject: string; content: string }) =>
+        `Subject: ${email.subject}\nBody: ${email.content}`,
     )
     .join("\n---\n");
 
