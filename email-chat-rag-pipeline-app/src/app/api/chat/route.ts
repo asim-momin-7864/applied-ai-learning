@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
   if (error) throw new Error(error.message);
 
-  // Step 4: If no emails found, return a consistent polite fallback from the LLM
+  //* Step 4: If no emails found, return a consistent polite fallback from the LLM
   if (!matchedEmails || matchedEmails.length === 0) {
     const fallbackResult = streamText({
       model: ollama.chat("llama3.2:1b"),
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
       prompt: `Did you find any emails for: "${userQuestion}"?`,
       temperature: 0,
     });
+    //* fallback response
     return createUIMessageStreamResponse({
       stream: toUIMessageStream({
         stream: fallbackResult.stream,
