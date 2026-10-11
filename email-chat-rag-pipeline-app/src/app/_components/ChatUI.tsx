@@ -137,7 +137,7 @@ export default function ChatUI() {
             />
             <Button
               type="submit"
-              disabled={status !== "ready" || !input.trim()}
+              disabled={status !== "ready"}
               size="icon"
               className="shrink-0"
             >

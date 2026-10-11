@@ -37,16 +37,22 @@ export async function POST(req: NextRequest) {
 
   if (error) throw new Error(error.message);
 
-  // Step 4: If no emails found, skip the LLM and return a fallback message directly
+  // Step 4: If no emails found, return a consistent polite fallback from the LLM
   if (!matchedEmails || matchedEmails.length === 0) {
-    const fallbackText =
-      "I couldn't find any relevant emails for your question. Try rephrasing or ingest more emails.";
     const fallbackResult = streamText({
-      model: ollama("llama3.2:1b"),
-      prompt: `Say this sentence word for word, nothing else: "${fallbackText}"`,
+      model: ollama.chat("llama3.2:1b"),
+      instructions: `You are an assistant for searching user emails. No relevant emails or data were found in the database for the user's question. Reply ONLY with: "I couldn't find any relevant emails or data related to your question. Please try rephrasing your search or ingesting more emails."`,
+      prompt: `Did you find any emails for: "${userQuestion}"?`,
+      temperature: 0,
     });
     return createUIMessageStreamResponse({
-      stream: toUIMessageStream({ stream: fallbackResult.stream }),
+      stream: toUIMessageStream({
+        stream: fallbackResult.stream,
+        onError: (err) => {
+          console.error("[chat/route] fallback error:", err);
+          return err instanceof Error ? err.message : String(err);
+        },
+      }),
     });
   }
 
@@ -72,7 +78,7 @@ ${context}
   const modelMessages = await convertToModelMessages(messages);
 
   const result = streamText({
-    model: ollama("llama3.2:1b"),
+    model: ollama.chat("llama3.2:1b"),
     instructions: systemPrompt,
     messages: modelMessages,
   });
