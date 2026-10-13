@@ -1,8 +1,8 @@
 //* model selection logic
 import { ChatGoogle } from "@langchain/google";
-import { Ollama } from "@langchain/ollama";
+import { ChatOllama } from "@langchain/ollama";
 
-// const llm = new Ollama({
+// const llm = new ChatOllama({
 //   model: "llama3", // Default value
 //   temperature: 0,
 //   maxRetries: 2,
@@ -41,7 +41,7 @@ export function createModel() {
       apiKey: process.env.GOOGLE_API_KEY as string,
     });
   } else {
-    return new Ollama({
+    return new ChatOllama({
       model: process.env.OLLAMA_MODEL as string,
       baseUrl: process.env.OLLAMA_BASE_URL as string,
       temperature: 0,
