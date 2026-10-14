@@ -8,4 +8,4 @@ export const supabase = createClient(
 );
 
 // we export id
-export const SUPABASE_ID = "00000000-0000-0000-0000-000000000001";
+export const SINGLE_CHAT_ID = "00000000-0000-0000-0000-000000000001";
