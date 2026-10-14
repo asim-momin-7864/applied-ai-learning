@@ -35,10 +35,10 @@ import { ChatOllama } from "@langchain/ollama";
 // function to select model
 
 export function createModel() {
-  if (process.env.PROVIDER === "gemini") {
+  if (process.env.MODEL_PROVIDER === "gemini") {
     return new ChatGoogle({
       model: process.env.GEMINI_MODEL as string,
-      apiKey: process.env.GOOGLE_API_KEY as string,
+      apiKey: process.env.GEMINI_API_KEY as string,
     });
   } else {
     return new ChatOllama({
