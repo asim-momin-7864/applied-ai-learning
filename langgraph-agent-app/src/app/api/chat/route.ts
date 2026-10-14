@@ -11,10 +11,6 @@ import {
 } from "@/lib/chat-history";
 
 import { SINGLE_CHAT_ID, supabase } from "@/lib/supabase";
-import { Content } from "next/font/google";
-
-//
-export const runtime = "nodejs";
 
 // GET api/chat
 export async function GET() {
@@ -101,10 +97,14 @@ export async function POST(req: Request) {
       answer,
     });
   } catch (error) {
-    console.error(error);
+    console.error("API /api/chat error:", error);
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "The agent could not complete the request.";
     return NextResponse.json(
       {
-        error: "The agent could not complete the request.",
+        error: errorMessage,
       },
       {
         status: 500,
